@@ -31,16 +31,25 @@ class PowerSupply:
     def measurePower(self,ch):
         return self.psu.query("MEAS:POWE? CH"+str(ch))
 
+    def setIndependantMode(self):
+        self.psu.write("OUTP:TRACK 0")
+
+    def setSeriellMode(self):
+        self.psu.write("OUTP:TRACK 1")
+
+    def setParallelMode(self):
+        self.psu.write("OUTP:TRACK 2")
+
 
 #MAIN
-_rm = visa.ResourceManager()
-sds = _rm.open_resource("TCPIP::192.168.178.67::INSTR")
+#_rm = visa.ResourceManager()
+#sds = _rm.open_resource("TCPIP::192.168.178.67::INSTR")
 
 
-ps = PowerSupply(sds)
+#ps = PowerSupply(sds)
 #sds.query("*IDN?")
-print(ps.measurePower(2))
-ps.setVoltage(2,0.23)
+#print(ps.measurePower(2))
+#ps.setVoltage(2,0.23)
 
-sds.close()
+#sds.close()
 
